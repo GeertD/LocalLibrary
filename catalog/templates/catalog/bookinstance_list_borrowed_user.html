@@ -1,0 +1,25 @@
+{% extends "catalog/base_generic.html" %}
+
+{% block content %}
+    <h1>Borrowed books</h1>
+    {% if bookinstance_list %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Book</th>
+                <th scope="col">Due date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bookinst in bookinstance_list %}
+            <tr>
+                <td><a href="{% url "book-detail" bookinst.book.pk %}">{{bookinst.book.title}}</a></td>
+                <td class="{% if bookinst.is_overdue %}text-danger{% endif %}">{{bookinst.due_back}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>There are no books borrowed for user: {{user.get_username}}.</p>
+    {% endif %}
+{% endblock content %}

@@ -10,6 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+# logins:
+# superuser: admin / admin1234
+# staffuser: Roger / let_me_in  (group librarians)
+# testuser: albertu / enter_the_vault
+
+
 from pathlib import Path
 import os
 
@@ -119,3 +125,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
+# Custom settings
+
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
