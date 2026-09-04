@@ -6,6 +6,9 @@ from django.urls import reverse
 from django.db.models import UniqueConstraint
 from django.db.models.functions import Lower
 from django.conf import settings
+from django.core.exceptions import ValidationError
+
+from .validators import is_isbn
 
 
 class Genre(models.Model):
@@ -74,7 +77,8 @@ class Book(models.Model):
         max_length=13,
         unique=True,
         help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn'
-                                      '">ISBN number</a>'
+                                      '">ISBN number</a>',
+        validators=[is_isbn]
         )
     genre = models.ManyToManyField(
         to=Genre,
@@ -135,6 +139,8 @@ class BookInstance(models.Model):
         permissions = (
             ("can_mark_returned", "Set book as returned"),
         )
+
+
 
     
 

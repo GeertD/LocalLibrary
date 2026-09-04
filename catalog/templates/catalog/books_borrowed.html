@@ -9,6 +9,7 @@
       <th scope="col">Author</th>
       <th scope="col">Due Date</th>
       <th scope="col">Borrower</th>
+      <th scope="col">Renew</th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +19,7 @@
       <td>{{bookinst.book.author.last_name}}, {{bookinst.book.author.first_name}}</td>
       <td {% if bookinst.is_overdue %}class="text-danger"{% endif %}>{{bookinst.due_back}}</td>
       <td>{{bookinst.borrower.username}}</td>
+      <td><a href="{% url "renew-book-librarian" bookinst.id %}">Renew</a></td>
     </tr>
     {% empty %}
     <tr>
